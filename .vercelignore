@@ -1,0 +1,6 @@
+.claude
+.gitignore
+
+# WordPress-migreringen. Vercel kan inte köra PHP, och temat ska inte
+# laddas upp som statiska filer — det hostas separat (se README).
+wp/

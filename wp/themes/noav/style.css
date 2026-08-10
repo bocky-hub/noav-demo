@@ -1,0 +1,17 @@
+/*
+Theme Name: Noav
+Theme URI: https://noav.se
+Author: Noav AB
+Description: Tema för Noav AB — HVB-hem för ungdomar 13–17 år. Innehåller egen innehållstyp för enheter med redigerbart antal lediga platser, samt blockmönster för sajtens sektioner.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 8.0
+License: Proprietär — endast för Noav AB
+Text Domain: noav
+Tags: custom-menu, featured-images, block-patterns, translation-ready
+
+Designsystemet ligger i assets/css/styles.css, som köas separat i
+inc/setup.php. Den här filen bär bara temats metadata — lägg inga
+stilregler här, de skulle laddas i onödan.
+*/

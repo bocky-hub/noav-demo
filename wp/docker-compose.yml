@@ -1,0 +1,70 @@
+# Lokal utvecklingsmiljö för Noav AB:s WordPress-sajt.
+#
+#   cd wp && docker compose up -d
+#   http://localhost:8080        — sajten
+#   http://localhost:8080/wp-admin — inloggning: noav / noav
+#
+# Temat bind-mountas från ./themes/noav, så filändringar syns direkt
+# vid omladdning. Databasen lever i en namngiven volym och överlever
+# `docker compose down` (men inte `down -v`).
+
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: noav
+      MARIADB_USER: noav
+      MARIADB_PASSWORD: noav
+      MARIADB_ROOT_PASSWORD: noav-root
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    image: wordpress:6-php8.3-apache
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: noav
+      WORDPRESS_DB_USER: noav
+      WORDPRESS_DB_PASSWORD: noav
+      # WP_DEBUG på i utveckling — fel syns i `docker compose logs wordpress`
+      # istället för att tysta ner sig till en vit sida.
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', true );
+        define( 'WP_DEBUG_DISPLAY', false );
+    volumes:
+      - wp-core:/var/www/html
+      - ./themes/noav:/var/www/html/wp-content/themes/noav
+
+  # Engångskommandon: `docker compose run --rm cli wp <kommando>`
+  cli:
+    image: wordpress:cli-php8.3
+    depends_on:
+      db:
+        condition: service_healthy
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: noav
+      WORDPRESS_DB_USER: noav
+      WORDPRESS_DB_PASSWORD: noav
+    volumes:
+      - wp-core:/var/www/html
+      - ./themes/noav:/var/www/html/wp-content/themes/noav
+      - ./bin:/bin/noav:ro
+    entrypoint: ["wp"]
+    command: ["--info"]
+
+volumes:
+  db-data:
+  wp-core:

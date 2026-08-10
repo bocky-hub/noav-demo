@@ -1,0 +1,35 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "Noav AB — HVB-hem för ungdomar 13–17 år",
+    "description": "Demo av Noav AB:s webbplats i WordPress. Lediga platser per enhet redigeras under Enheter, all sidtext i blockredigeraren.",
+    "author": "Noav AB"
+  },
+  "landingPage": "/",
+  "login": true,
+  "features": {
+    "networking": true
+  },
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "steps": [
+    {
+      "step": "setSiteLanguage",
+      "language": "sv_SE"
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "git:directory",
+        "url": "https://github.com/bocky-hub/noav-demo.git",
+        "ref": "main",
+        "path": "wp/themes/noav"
+      },
+      "options": {
+        "activate": true
+      }
+    }
+  ]
+}
