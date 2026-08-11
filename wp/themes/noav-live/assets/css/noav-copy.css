@@ -1,0 +1,40 @@
+/* -------------------------------------------------------------------------
+   noav-copy.css — small, well-scoped adjustments layered on top of the two
+   original Durable stylesheets. Nothing here changes the visual design; it
+   only replaces two behaviours the original drove with JavaScript we do not
+   ship (an internal scroll container and a resize-computed hero "slant"),
+   so the static copy behaves correctly at every viewport width.
+   ------------------------------------------------------------------------- */
+
+/* The original renders everything inside #main-body, a viewport-height
+   element with its own scrollbar. Without the original JS that is fragile,
+   so we let the document scroll normally instead. The sticky header keeps
+   working against the window. */
+html,
+body {
+	height: auto;
+	min-height: 100%;
+}
+
+#__next {
+	height: auto;
+}
+
+#main-body {
+	height: auto;
+	min-height: 100vh;
+	overflow: visible;
+}
+
+/* Kontakt map container height (the original sizes it via the map script). */
+#noav-leaflet {
+	min-height: 20rem;
+}
+
+@media (min-width: 768px) {
+	#noav-leaflet { min-height: 24rem; }
+}
+
+@media (min-width: 1024px) {
+	#noav-leaflet { min-height: 28rem; }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "Vinkelvikens HVB — trogen kopia av noav.se",
+    "description": "En pixeltrogen WordPress-kopia av den publika webbplatsen noav.se (Vinkelvikens HVB). Samma struktur, CSS, typsnitt, bilder och innehåll som originalet. Utgångspunkt för fortsatt arbete i WordPress.",
+    "author": "Noav AB"
+  },
+  "landingPage": "/",
+  "login": true,
+  "features": {
+    "networking": true
+  },
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "steps": [
+    {
+      "step": "setSiteLanguage",
+      "language": "sv_SE"
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "git:directory",
+        "url": "https://github.com/bocky-hub/noav-demo.git",
+        "ref": "main",
+        "path": "wp/themes/noav-live"
+      },
+      "options": {
+        "activate": true
+      }
+    }
+  ]
+}

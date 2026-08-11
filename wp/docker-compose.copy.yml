@@ -1,0 +1,67 @@
+# Lokal WordPress för den TROGNA KOPIAN av noav.se (temat noav-live).
+#
+#   cd wp && docker compose -f docker-compose.copy.yml up -d && ./bin/setup-live.sh
+#   http://localhost:8081            — sajten (kopian av noav.se)
+#   http://localhost:8081/wp-admin  — inloggning: noav / noav
+#
+# Körs helt separat från demo-miljön i docker-compose.yml (egna volymer och
+# egen port), så de två kan köras samtidigt utan att krocka. Temat
+# bind-mountas från ./themes/noav-live, så filändringar syns direkt.
+
+services:
+  db-live:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: noavlive
+      MARIADB_USER: noav
+      MARIADB_PASSWORD: noav
+      MARIADB_ROOT_PASSWORD: noav-root
+    volumes:
+      - db-data-live:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress-live:
+    image: wordpress:6-php8.3-apache
+    depends_on:
+      db-live:
+        condition: service_healthy
+    ports:
+      - "8081:80"
+    environment:
+      WORDPRESS_DB_HOST: db-live:3306
+      WORDPRESS_DB_NAME: noavlive
+      WORDPRESS_DB_USER: noav
+      WORDPRESS_DB_PASSWORD: noav
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', true );
+        define( 'WP_DEBUG_DISPLAY', false );
+    volumes:
+      - wp-core-live:/var/www/html
+      - ./themes/noav-live:/var/www/html/wp-content/themes/noav-live
+
+  # Engångskommandon: `docker compose -f docker-compose.copy.yml run --rm cli-live wp <kommando>`
+  cli-live:
+    image: wordpress:cli-php8.3
+    depends_on:
+      db-live:
+        condition: service_healthy
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db-live:3306
+      WORDPRESS_DB_NAME: noavlive
+      WORDPRESS_DB_USER: noav
+      WORDPRESS_DB_PASSWORD: noav
+    volumes:
+      - wp-core-live:/var/www/html
+      - ./themes/noav-live:/var/www/html/wp-content/themes/noav-live
+    entrypoint: ["wp"]
+    command: ["--info"]
+
+volumes:
+  db-data-live:
+  wp-core-live:

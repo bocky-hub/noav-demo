@@ -1,0 +1,16 @@
+/*
+Theme Name: Noav – Vinkelvikens HVB (kopia)
+Theme URI: https://noav.se/
+Author: Noav AB
+Description: Pixeltrogen WordPress-kopia av den publika webbplatsen noav.se (Vinkelvikens HVB). Återger originalets Durable/Next.js-sajt 1:1 — samma struktur, CSS, typsnitt, bilder och innehåll — som utgångspunkt för fortsatt arbete i WordPress. Allt bildmaterial och all CSS är lokala kopior.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: Proprietary
+Text Domain: noav-live
+*/
+
+/* Den faktiska designen ligger i de två inlånade Durable-stilmallarna
+   (assets/css/*.css) som köas i functions.php. Denna fil används bara
+   för temats metadata. */

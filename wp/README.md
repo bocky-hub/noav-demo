@@ -4,6 +4,18 @@ Migrering av den statiska demon (i repots rot) till WordPress. Designen är
 densamma; skillnaden är att innehållet nu redigeras i wp-admin istället för i
 kod, och att **lediga platser** är riktiga fält som personalen ändrar själva.
 
+> ### 🟡 Trogen kopia av live-sajten noav.se
+>
+> Utöver omdesign-temat ovan finns nu en **pixeltrogen 1:1-kopia av den publika
+> webbplatsen [noav.se](https://www.noav.se)** som ett eget tema:
+> [`themes/noav-live`](themes/noav-live/README.md). Samma struktur, CSS, typsnitt,
+> bilder och innehåll som originalet — som utgångspunkt för fortsatt arbete.
+>
+> ```bash
+> cd wp && docker compose -f docker-compose.copy.yml up -d && ./bin/setup-live.sh
+> ```
+> Kopian: <http://localhost:8081> (körs separat från demon på 8080).
+
 ## Demo i webbläsaren
 
 **[Öppna demon →](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2Fbocky-hub%2Fnoav-demo%2Fmain%2Fwp%2Fplayground%2Fblueprint.json)**
