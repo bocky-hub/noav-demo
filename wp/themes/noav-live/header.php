@@ -42,7 +42,7 @@ $noav_landing = ( '' === $noav_unit );
 	<header id="website-header" class="!z-[2000] transition-colors duration-300 sticky top-0" style="background-color: rgb(255, 255, 255); color: rgb(17, 24, 39);">
 		<div class="relative z-10 grid items-center lg:gap-6 xl:gap-10 mx-auto pt-8 pb-8 px-6 lg:px-12" style="grid-template-columns:auto auto auto">
 			<div class="col-span-2 lg:col-span-1">
-				<a class="max-w-full overflow-hidden grid" target="_self" href="<?php echo esc_url( home_url( '/' . $noav_unit ) ); ?>">
+				<a class="max-w-full overflow-hidden grid" target="_self" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Till startsidan">
 					<img class="hidden lg:block transition-all object-contain" src="<?php echo NOAV_URI; ?>/img/25ajhhe94M3miqtjN3O4vBkcRfQuAFCMFg8YG4Izo0ohYjDOSkmzxPJJMvp7n03p.png" alt="Noav" style="height:174px">
 					<img class="lg:hidden transition-all object-contain" src="<?php echo NOAV_URI; ?>/img/25ajhhe94M3miqtjN3O4vBkcRfQuAFCMFg8YG4Izo0ohYjDOSkmzxPJJMvp7n03p.png" alt="Noav" style="height:64px">
 				</a>
