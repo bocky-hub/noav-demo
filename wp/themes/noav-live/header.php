@@ -46,6 +46,10 @@ $noav_landing = ( '' === $noav_unit );
 					<img class="hidden lg:block transition-all object-contain" src="<?php echo NOAV_URI; ?>/img/25ajhhe94M3miqtjN3O4vBkcRfQuAFCMFg8YG4Izo0ohYjDOSkmzxPJJMvp7n03p.png" alt="Noav" style="height:174px">
 					<img class="lg:hidden transition-all object-contain" src="<?php echo NOAV_URI; ?>/img/25ajhhe94M3miqtjN3O4vBkcRfQuAFCMFg8YG4Izo0ohYjDOSkmzxPJJMvp7n03p.png" alt="Noav" style="height:64px">
 				</a>
+				<div style="margin-top:8px;display:flex;align-items:center;gap:10px;">
+					<span aria-hidden="true" style="width:22px;height:2px;background:rgb(82,63,41);opacity:.55;display:inline-block;flex:none;"></span>
+					<span style="font-family:var(--head-fontFamily);color:rgb(82,63,41);font-size:18px;letter-spacing:.02em;line-height:1;"><?php echo esc_html( noav_units()[ $noav_unit ] ); ?></span>
+				</div>
 			</div>
 			<div class="hidden lg:flex item-center justify-end gap-10 lg:col-span-2">
 				<ul class="hidden items-center flex-wrap lg:flex justify-end gap-x-6" style="color: rgb(17, 24, 39);">
