@@ -8,8 +8,9 @@
  * color used sparingly — a hairline mark, the labels, the headings, the
  * button. No card boxes, no heavy shadows, no gradient washes.
  *
- * Kept as plain HTML + only NOAV_URI / home_url tokens so it renders both in
- * WordPress and in the static preview.
+ * Kept as plain HTML + only NOAV_URI / home_url tokens, plus
+ * noav_platser_badge() — antalet lediga platser per enhet, redigerbart i
+ * wp-admin → Lediga platser.
  */
 ?>
 <section style="background-color: rgb(250, 247, 240);">
@@ -40,6 +41,8 @@
 					<span style="flex:1;height:1px;background:currentColor;"></span>
 				</div>
 
+				<?php noav_platser_badge( 'vinkelviken' ); ?>
+
 				<p class="body-normal" style="color:rgb(17,24,39);opacity:.78;max-width:26rem;margin:1.25rem auto 0;">Lugnt och familjärt HVB i Hörby för ungdomar 13–17 år, som arbetar lågaffektivt och kravanpassat.</p>
 
 				<a href="<?php echo esc_url( home_url( '/vinkelviken' ) ); ?>" style="margin-top:2.25rem;display:inline-flex;align-items:center;justify-content:center;border-width:2px;border-style:solid;background-color:rgb(82,63,41);color:rgb(255,255,255);border-radius:40px;border-color:rgb(82,63,41);padding:14px 34px;font-family:var(--body-fontFamily);font-weight:600;">Läs mer →</a>
@@ -62,6 +65,8 @@
 					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/><path d="M10 19v-5h4v5"/></svg>
 					<span style="flex:1;height:1px;background:currentColor;"></span>
 				</div>
+
+				<?php noav_platser_badge( 'kyrkhult' ); ?>
 
 				<p class="body-normal" style="color:rgb(17,24,39);opacity:.78;max-width:26rem;margin:1.25rem auto 0;">Ny enhet på Vilshultsvägen 15. Mer information om Kyrkhult kommer snart.</p>
 

@@ -36,6 +36,14 @@ renderas likadant — men serveras nu av WordPress.
 Alla sidor, enheterna och startsidan skapas **automatiskt när temat aktiveras**
 (`after_switch_theme` i `functions.php`), hierarkiskt.
 
+### Lediga platser
+
+Varje enhetskort på landningssidan visar antalet lediga platser (6 platser
+totalt per enhet). Antalet redigeras av personalen i **wp-admin → Lediga
+platser** — ett sifferfält per enhet, `0` visar "Fullbelagt just nu". Sparas som
+alternativen `noav_lediga_vinkelviken` / `noav_lediga_kyrkhult`; totalsiffrorna
+ändras i `noav_platser_totalt()` i `functions.php`.
+
 ## Uppbyggnad
 
 - `header.php` — enhets-medveten: på landningen visas bara loggan; inne i en enhet
@@ -57,8 +65,9 @@ docker compose -f docker-compose.copy.yml up -d
 ./bin/setup-live.sh
 ```
 
-Sajten: <http://localhost:8081> · wp-admin: <http://localhost:8081/wp-admin>
-(`noav` / `noav`). Körs separat från demo-miljön på port 8080.
+Sajten: <http://localhost:8082> · wp-admin: <http://localhost:8082/wp-admin>
+(`noav` / `noav`). Port 8082 — 8081 är Metros standardport och krockar med
+React Native-utveckling.
 
 ## Kör i webbläsaren (WordPress Playground)
 

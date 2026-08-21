@@ -20,7 +20,7 @@ Den hämtar temat från `main` i det här repot, så en push slår igenom i län
 docker compose -f docker-compose.copy.yml up -d && ./bin/setup-live.sh
 ```
 
-Sajten: <http://localhost:8081> · wp-admin: <http://localhost:8081/wp-admin>
+Sajten: <http://localhost:8082> · wp-admin: <http://localhost:8082/wp-admin>
 (`noav` / `noav`). `setup-live.sh` installerar WordPress och aktiverar temat, som
 i sin tur skapar landningssidan + de två enheterna × sju sidor.
 

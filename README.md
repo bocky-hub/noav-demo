@@ -8,7 +8,8 @@ Temat ligger i [`wp/themes/noav-live`](wp/themes/noav-live/README.md).
 
 ## Så fungerar sajten
 
-- **Landning (`/`)** — ingen meny, bara Noavs logga + två enhetskort.
+- **Landning (`/`)** — ingen meny, bara Noavs logga + två enhetskort. Varje kort
+  visar antal **lediga platser** (av 6), redigerbart i wp-admin → Lediga platser.
 - **Klick på ett kort → in i enheten**, då dyker menyn upp (scopad till enheten).
 - **`/vinkelviken/…`** — hela kopian av noav.se.
 - **`/kyrkhult/…`** — platshållarenhet (framtida). Känt: adress Vilshultsvägen 15;
@@ -33,7 +34,7 @@ docker compose -f docker-compose.copy.yml up -d
 ./bin/setup-live.sh
 ```
 
-Sajten: <http://localhost:8081> · wp-admin: <http://localhost:8081/wp-admin>
+Sajten: <http://localhost:8082> · wp-admin: <http://localhost:8082/wp-admin>
 (`noav` / `noav`). Temat skapar hela sidträdet automatiskt vid aktivering.
 
 Mer detaljer i [temats README](wp/themes/noav-live/README.md) — inklusive de få

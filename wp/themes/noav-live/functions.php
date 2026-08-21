@@ -35,6 +35,52 @@ function noav_sections() {
 	);
 }
 
+/** Totalt antal platser per enhet. */
+function noav_platser_totalt( $unit ) {
+	$totalt = array(
+		'vinkelviken' => 6,
+		'kyrkhult'    => 6,
+	);
+	return isset( $totalt[ $unit ] ) ? $totalt[ $unit ] : 0;
+}
+
+/** Antal lediga platser för en enhet (0..totalt). Redigeras i wp-admin → Lediga platser. */
+function noav_platser_lediga( $unit ) {
+	$totalt = noav_platser_totalt( $unit );
+	$value  = (int) get_option( 'noav_lediga_' . $unit, $totalt );
+	return max( 0, min( $totalt, $value ) );
+}
+
+/** Platsbrickan på landningssidans enhetskort: "N lediga platser av 6" / "Fullbelagt just nu". */
+function noav_platser_badge( $unit ) {
+	$totalt = noav_platser_totalt( $unit );
+	if ( $totalt < 1 ) {
+		return;
+	}
+	$lediga = noav_platser_lediga( $unit );
+	if ( $lediga > 0 ) {
+		$text = 1 === $lediga ? '1 ledig plats av ' . $totalt : $lediga . ' lediga platser av ' . $totalt;
+		$dot  = 'rgb(74,124,89)';
+		$fg   = 'rgb(56,98,70)';
+		$bd   = 'rgba(74,124,89,.32)';
+		$bg   = 'rgba(74,124,89,.08)';
+	} else {
+		$text = 'Fullbelagt just nu';
+		$dot  = 'rgb(176,88,64)';
+		$fg   = 'rgb(82,63,41)';
+		$bd   = 'rgba(82,63,41,.25)';
+		$bg   = 'rgba(82,63,41,.05)';
+	}
+	printf(
+		'<div style="margin-top:1.5rem;display:inline-flex;align-items:center;gap:9px;padding:9px 20px;border-radius:40px;border:1px solid %1$s;background-color:%2$s;"><span style="width:8px;height:8px;border-radius:50%%;background-color:%3$s;"></span><span class="body-normal" style="font-size:14px;font-weight:600;color:%4$s;">%5$s</span></div>',
+		$bd,
+		$bg,
+		$dot,
+		$fg,
+		esc_html( $text )
+	);
+}
+
 /** Current unit slug (vinkelviken/kyrkhult), or '' on the landing/other. */
 function noav_current_unit() {
 	if ( ! is_page() ) {
@@ -129,3 +175,63 @@ add_action( 'after_switch_theme', function () {
 
 	flush_rewrite_rules();
 } );
+
+/**
+ * wp-admin → "Lediga platser": ett enkelt formulär där personalen sätter antal
+ * lediga platser per enhet. Visas på landningssidans enhetskort.
+ */
+add_action( 'admin_menu', function () {
+	add_menu_page(
+		'Lediga platser',
+		'Lediga platser',
+		'edit_pages',
+		'noav-lediga-platser',
+		'noav_platser_admin_page',
+		'dashicons-groups',
+		25
+	);
+} );
+
+function noav_platser_admin_page() {
+	if ( ! current_user_can( 'edit_pages' ) ) {
+		return;
+	}
+
+	$saved = false;
+	if ( isset( $_POST['noav_platser_nonce'] ) ) {
+		check_admin_referer( 'noav_platser_save', 'noav_platser_nonce' );
+		foreach ( noav_units() as $slug => $name ) {
+			$totalt = noav_platser_totalt( $slug );
+			$raw    = isset( $_POST[ 'noav_lediga_' . $slug ] ) ? (int) $_POST[ 'noav_lediga_' . $slug ] : 0;
+			update_option( 'noav_lediga_' . $slug, max( 0, min( $totalt, $raw ) ) );
+		}
+		$saved = true;
+	}
+	?>
+	<div class="wrap">
+		<h1>Lediga platser</h1>
+		<?php if ( $saved ) : ?>
+			<div class="notice notice-success is-dismissible"><p>Sparat — landningssidan visar nu de nya siffrorna.</p></div>
+		<?php endif; ?>
+		<p>Antalet visas på startsidans enhetskort. Sätt till <strong>0</strong> så visas ”Fullbelagt just nu”.</p>
+		<form method="post">
+			<?php wp_nonce_field( 'noav_platser_save', 'noav_platser_nonce' ); ?>
+			<table class="form-table" role="presentation">
+				<?php foreach ( noav_units() as $slug => $name ) : $totalt = noav_platser_totalt( $slug ); ?>
+					<tr>
+						<th scope="row"><label for="noav_lediga_<?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $name ); ?></label></th>
+						<td>
+							<input type="number" min="0" max="<?php echo (int) $totalt; ?>" step="1"
+								id="noav_lediga_<?php echo esc_attr( $slug ); ?>"
+								name="noav_lediga_<?php echo esc_attr( $slug ); ?>"
+								value="<?php echo (int) noav_platser_lediga( $slug ); ?>" style="width:5em;">
+							av <?php echo (int) $totalt; ?> platser lediga
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+			<?php submit_button( 'Spara' ); ?>
+		</form>
+	</div>
+	<?php
+}

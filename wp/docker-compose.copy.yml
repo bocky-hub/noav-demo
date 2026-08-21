@@ -1,12 +1,12 @@
 # Lokal WordPress för den TROGNA KOPIAN av noav.se (temat noav-live).
 #
 #   cd wp && docker compose -f docker-compose.copy.yml up -d && ./bin/setup-live.sh
-#   http://localhost:8081            — sajten (kopian av noav.se)
-#   http://localhost:8081/wp-admin  — inloggning: noav / noav
+#   http://localhost:8082            — sajten (kopian av noav.se)
+#   http://localhost:8082/wp-admin  — inloggning: noav / noav
 #
-# Körs helt separat från demo-miljön i docker-compose.yml (egna volymer och
-# egen port), så de två kan köras samtidigt utan att krocka. Temat
-# bind-mountas från ./themes/noav-live, så filändringar syns direkt.
+# Port 8082 (inte 8081 — det är Metros standardport, så React Native-utveckling
+# skuggar annars sajten). Temat bind-mountas från ./themes/noav-live, så
+# filändringar syns direkt.
 
 services:
   db-live:
@@ -30,7 +30,7 @@ services:
       db-live:
         condition: service_healthy
     ports:
-      - "8081:80"
+      - "8082:80"
     environment:
       WORDPRESS_DB_HOST: db-live:3306
       WORDPRESS_DB_NAME: noavlive

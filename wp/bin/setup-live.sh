@@ -5,7 +5,7 @@
 #
 #   cd wp && docker compose -f docker-compose.copy.yml up -d && ./bin/setup-live.sh
 #
-# Sajten: http://localhost:8081  ·  wp-admin: http://localhost:8081/wp-admin
+# Sajten: http://localhost:8082  ·  wp-admin: http://localhost:8082/wp-admin
 # Inloggning: noav / noav
 #
 # När temat aktiveras skapar det självt de åtta sidorna (startsida + sju
@@ -16,7 +16,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 COMPOSE="docker compose -f docker-compose.copy.yml"
-SITE_URL="http://localhost:8081"
+SITE_URL="http://localhost:8082"
 
 wp() { $COMPOSE run --rm -T cli-live "$@"; }
 
