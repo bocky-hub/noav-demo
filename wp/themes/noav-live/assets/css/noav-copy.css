@@ -22,7 +22,7 @@ body {
 
 #main-body {
 	height: auto;
-	min-height: 100vh;
+	min-height: 0;
 	overflow: visible;
 }
 
@@ -39,6 +39,5 @@ body {
 	[data-noav-map] { min-height: 28rem; }
 }
 
-/* Shared navigation uses the existing fonts, spacing and link treatment. */
-.noav-global-nav { padding-bottom: 1.5rem; }
-.noav-global-toggle { position: absolute; right: 1.5rem; }
+
+body.home { background-color: rgb(250, 247, 240); }

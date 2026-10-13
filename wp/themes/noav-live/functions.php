@@ -18,7 +18,7 @@ define( 'NOAV_URI', get_template_directory_uri() . '/assets' );
 function noav_units() {
 	return array(
 		'vinkelviken' => 'Vinkelviken',
-		'kyrkhult'    => 'Kyrkhult',
+		'kyrkhult'    => 'Söderbacken',
 	);
 }
 
@@ -27,7 +27,6 @@ function noav_sections() {
 	return array(
 		'malgrupp'       => 'Målgrupp',
 		'behandling'     => 'Behandling',
-		'aktuellt'       => 'Aktuellt',
 		'galleri'        => 'Galleri',
 	);
 }
@@ -38,6 +37,7 @@ function noav_global_sections() {
 		'oss'            => 'Om oss',
 		'platsforfrogan' => 'Platsförfrågan',
 		'kontakt'        => 'Kontakt',
+		'aktuellt'       => 'Aktuellt',
 	);
 }
 
@@ -196,11 +196,37 @@ add_action( 'init', function () {
 	}
 } );
 
+// Add the shared news page and update only the original default unit title.
+add_action( 'init', function () {
+	if ( ! get_option( 'noav_shared_news_added' ) ) {
+		$page = get_page_by_path( 'aktuellt' );
+		if ( ! $page ) {
+			$id = wp_insert_post( array(
+				'post_title' => 'Aktuellt', 'post_name' => 'aktuellt',
+				'post_status' => 'publish', 'post_type' => 'page',
+				'post_content' => '<!-- Renderas av temat (parts/…). -->',
+			), true );
+			if ( ! $id || is_wp_error( $id ) ) { return; }
+			flush_rewrite_rules();
+		}
+		update_option( 'noav_shared_news_added', 1 );
+	}
+	if ( ! get_option( 'noav_soderbacken_name_updated' ) ) {
+		$page = get_page_by_path( 'kyrkhult' );
+		if ( ! $page ) { return; }
+		if ( 'Kyrkhult' === $page->post_title ) {
+			$result = wp_update_post( array( 'ID' => $page->ID, 'post_title' => 'Söderbacken' ), true );
+			if ( is_wp_error( $result ) ) { return; }
+		}
+		update_option( 'noav_soderbacken_name_updated', 1 );
+	}
+}, 11 );
+
 // Keep old shared-page links working after moving them to the front-page menu.
 add_action( 'template_redirect', function () {
 	$section = noav_current_section();
 	$legacy_path = trim( (string) get_query_var( 'pagename' ), '/' );
-	if ( preg_match( '#^(vinkelviken|kyrkhult)/(oss|platsforfrogan|kontakt)$#', $legacy_path, $match ) ) {
+	if ( preg_match( '#^(vinkelviken|kyrkhult)/(oss|platsforfrogan|kontakt|aktuellt)$#', $legacy_path, $match ) ) {
 		$section = $match[2];
 	} elseif ( ! noav_current_unit() || ! isset( noav_global_sections()[ $section ] ) ) {
 		return;

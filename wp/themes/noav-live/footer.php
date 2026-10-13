@@ -5,7 +5,7 @@
  * @package Noav_Live
  */
 ?>
-<?php include get_template_directory() . '/parts/_footer.html'; ?>
+<?php // The page ends after its content; the old footer contained only blank space. ?>
 	</div><!-- #main-body -->
 </div><!-- #__next -->
 <?php wp_footer(); ?>
