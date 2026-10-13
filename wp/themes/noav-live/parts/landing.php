@@ -48,7 +48,7 @@
 				</div>
 
 				<a href="<?php echo esc_url( home_url( '/kyrkhult' ) ); ?>" class="block w-full aspect-w-16 aspect-h-9 rounded-2xl md:rounded-3xl lg:rounded-4xl" style="margin-top:2.25rem;overflow:hidden;">
-					<img class="object-cover" src="<?php echo NOAV_URI; ?>/img/soderbacken-exterior-color-matched.jpg" alt="Söderbackens hus" style="object-position:center 78%;">
+					<img class="object-cover" src="<?php echo NOAV_URI; ?>/img/soderbacken-exterior-retouched.jpg" alt="Söderbackens hus" style="object-position:center 78%;">
 				</a>
 
 			</article>
