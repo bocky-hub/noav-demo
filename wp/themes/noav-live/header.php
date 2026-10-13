@@ -44,7 +44,7 @@ $noav_section = noav_current_section();
 					<?php endif; ?>
 					<?php foreach ( $noav_landing ? noav_global_sections() : noav_sections() as $slug => $label ) : ?>
 					<?php $is_current = $slug === $noav_section; ?>
-					<li class="border-b-2" style="border-color:<?php echo $is_current ? '#000000' : 'transparent'; ?>"><a class="block body-normal whitespace-nowrap py-1.5" href="<?php echo esc_url( home_url( $noav_landing ? "/$slug/" : "/$noav_unit/$slug/" ) ); ?>"<?php echo $is_current ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $label ); ?></a></li>
+					<li class="border-b-2" style="border-color:transparent"><a class="block body-normal whitespace-nowrap py-1.5" href="<?php echo esc_url( home_url( $noav_landing ? "/$slug/" : "/$noav_unit/$slug/" ) ); ?>"<?php echo $is_current ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $label ); ?></a></li>
 					<?php endforeach; ?>
 				</ul>
 				<?php if ( $noav_landing ) { include get_template_directory() . '/parts/_social.html'; } ?>

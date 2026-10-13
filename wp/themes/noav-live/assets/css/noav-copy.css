@@ -64,10 +64,19 @@ body.home { background-color: rgb(250, 247, 240); }
 }
 
 .noav-contact-details strong {
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .noav-contact-group + .noav-contact-group,
 .noav-contact-map-link {
 	margin-top: 1.25rem;
+}
+
+/* Keep the active page marker close to the menu text on all screen sizes. */
+#website-header a[aria-current="page"] {
+	text-decoration-line: underline;
+	text-decoration-color: #000000;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 4px;
+	text-decoration-skip-ink: none;
 }

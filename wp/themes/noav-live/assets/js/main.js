@@ -26,8 +26,7 @@
 				var li = document.createElement('li');
 				var link = a.cloneNode(true);
 				link.className = 'block body-normal whitespace-nowrap';
-				link.style.cssText = 'display:block;padding:12px 0;color:#111827;border-bottom:' +
-					(a.getAttribute('aria-current') === 'page' ? '2px solid #000000;' : '1px solid rgba(17,24,39,.05);');
+				link.style.cssText = 'display:block;padding:12px 0;color:#111827;border-bottom:1px solid rgba(17,24,39,.05);';
 				li.appendChild(link);
 				list.appendChild(li);
 			});

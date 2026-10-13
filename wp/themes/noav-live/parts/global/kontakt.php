@@ -11,9 +11,6 @@
 						<p>Vinkelgatan 11<br>242 31 Hörby<br>Telefonnummer: <a href="tel:+46765188401">0765-18 84 01</a></p>
 					</div>
 					<div class="noav-contact-group">
-						<p><strong>Verksamhetschef</strong><br>Mia Möller<br><a href="mailto:mia.moller@noav.se">mia.moller@noav.se</a><br>Telefonnummer: <a href="tel:+46765188400">0765-18 84 00</a></p>
-					</div>
-					<div class="noav-contact-group">
 						<p><strong>Föreståndare</strong><br>Sanna Svensson<br><a href="mailto:sanna.svensson@noav.se">sanna.svensson@noav.se</a><br>Telefonnummer: <a href="tel:+46760673690">0760-67 36 90</a></p>
 					</div>
 					<div class="noav-contact-map-link">
@@ -25,13 +22,13 @@
 				<h2 class="heading-large" style="color:rgb(82,63,41);">Söderbacken</h2>
 				<div class="noav-contact-details body-normal" style="color:rgb(17,24,39);">
 					<div class="noav-contact-group">
-						<p>Vilshultsvägen 15<br>Vilshult</p>
+						<p>Vilshultsvägen 15<br>293 74 Kyrkhult</p>
 					</div>
 					<div class="noav-contact-group">
 						<p><strong>Föreståndare</strong><br>Mia Möller<br><a href="mailto:mia.moller@noav.se">mia.moller@noav.se</a><br>Telefonnummer: <a href="tel:+46765188400">0765-18 84 00</a></p>
 					</div>
 					<div class="noav-contact-map-link">
-						<p><a class="underline" href="https://www.google.com/maps/search/?api=1&amp;query=Vilshultsv%C3%A4gen+15%2C+Vilshult" target="_blank" rel="noopener">Öppna i Google Maps</a></p>
+						<p><a class="underline" href="https://www.google.com/maps/search/?api=1&amp;query=Vilshultsv%C3%A4gen+15%2C+293+74+Kyrkhult" target="_blank" rel="noopener">Öppna i Google Maps</a></p>
 					</div>
 				</div>
 			</article>
