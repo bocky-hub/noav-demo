@@ -20,8 +20,8 @@
 			<!-- Vinkelviken -->
 			<article class="flex flex-col items-center text-center">
 				<h2 class="heading-large" style="color:rgb(82,63,41);margin-top:0;"><a href="<?php echo esc_url( home_url( '/vinkelviken/' ) ); ?>" style="color:inherit;text-decoration:none">Vinkelviken</a></h2>
-				<div class="body-normal" style="margin-top:.65rem;font-size:12px;letter-spacing:.16em;color:rgb(82,63,41);font-weight:600;">HVB</div>
-				<p class="body-normal" style="color:rgb(17,24,39);opacity:.78;margin-top:.75rem;">Hörby, Skåne</p>
+				<div class="body-normal" style="margin-top:.35rem;font-size:12px;letter-spacing:.16em;color:rgb(82,63,41);font-weight:600;">HVB</div>
+				<p class="body-normal" style="color:rgb(17,24,39);opacity:.78;margin-top:.4rem;">Hörby, Skåne</p>
 
 				<div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:1.5rem auto 0;color:rgb(82,63,41);width:150px;opacity:.4;">
 					<span style="flex:1;height:1px;background:currentColor;"></span>
@@ -38,8 +38,8 @@
 			<!-- Söderbacken -->
 			<article class="flex flex-col items-center text-center">
 				<h2 class="heading-large" style="color:rgb(82,63,41);margin-top:0;"><a href="<?php echo esc_url( home_url( '/kyrkhult/' ) ); ?>" style="color:inherit;text-decoration:none">Söderbacken</a></h2>
-				<div class="body-normal" style="margin-top:.65rem;font-size:12px;letter-spacing:.16em;color:rgb(82,63,41);font-weight:600;">HVB</div>
-				<p class="body-normal" style="color:rgb(17,24,39);opacity:.78;margin-top:.75rem;">Kyrkhult, Blekinge</p>
+				<div class="body-normal" style="margin-top:.35rem;font-size:12px;letter-spacing:.16em;color:rgb(82,63,41);font-weight:600;">HVB</div>
+				<p class="body-normal" style="color:rgb(17,24,39);opacity:.78;margin-top:.4rem;">Kyrkhult, Blekinge</p>
 
 				<div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:1.5rem auto 0;color:rgb(82,63,41);width:150px;opacity:.4;">
 					<span style="flex:1;height:1px;background:currentColor;"></span>
