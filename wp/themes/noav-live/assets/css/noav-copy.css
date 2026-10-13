@@ -80,3 +80,42 @@ body.home { background-color: rgb(250, 247, 240); }
 	text-underline-offset: 4px;
 	text-decoration-skip-ink: none;
 }
+
+/* Reserve the expanded header's space so shrinking cannot move the page
+   or repeatedly switch states on pages with very little scroll space. */
+.noav-header-spacer {
+	display: none;
+}
+
+#website-header .noav-desktop-logo {
+	height: 174px;
+	transition: height 300ms ease;
+}
+
+@media (min-width: 1024px) {
+	#website-header.noav-header-compact {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+	}
+
+	#website-header.noav-header-compact .noav-desktop-logo {
+		height: 80px;
+	}
+
+	#website-header.noav-header-compact + .noav-header-spacer {
+		display: block;
+		height: 238px;
+	}
+
+	.admin-bar #website-header.noav-header-compact {
+		top: 32px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#website-header .noav-desktop-logo {
+		transition: none;
+	}
+}

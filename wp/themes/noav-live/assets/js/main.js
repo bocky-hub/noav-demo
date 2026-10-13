@@ -6,9 +6,19 @@
 (function () {
 	'use strict';
 
-	/* ---- Mobile menu -------------------------------------------------- */
 	var header = document.getElementById('website-header');
 	if (header) {
+		/* Match noav.se: desktop logo is smaller below the top of the page. */
+		var updateHeader = function () {
+			var compact = window.matchMedia('(min-width: 1024px)').matches && window.scrollY > 20;
+			header.classList.toggle('noav-header-compact', compact);
+		};
+		window.addEventListener('scroll', updateHeader, { passive: true });
+		window.addEventListener('resize', updateHeader);
+		window.addEventListener('pageshow', updateHeader);
+		updateHeader();
+
+		/* ---- Mobile menu ---------------------------------------------- */
 		var btn = header.querySelector('.lg\\:hidden button');
 		var navLinks = Array.prototype.slice
 			.call(header.querySelectorAll('ul a'))
