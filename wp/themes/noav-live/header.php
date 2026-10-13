@@ -9,6 +9,7 @@
  */
 $noav_unit    = function_exists( 'noav_current_unit' ) ? noav_current_unit() : '';
 $noav_landing = ( '' === $noav_unit );
+$noav_section = noav_current_section();
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> style="scroll-padding-top: 128px; --head-fontFamily: 'Merriweather', serif; --head-fontWeight: 400; --head-fontStyle: normal; --body-fontFamily: 'Nunito', sans-serif; --body-fontWeight: 400; --body-fontStyle: normal; --body-fontHeight: 1.25; --header-logo-fontFamily: 'Bree Serif', serif; --footer-logo-fontFamily: 'Bree Serif', serif; --header-logo-fontWeight: 400; --footer-logo-fontWeight: 400;">
 <head>
@@ -42,7 +43,8 @@ $noav_landing = ( '' === $noav_unit );
 					<li class="border-b-2" style="border-color:transparent"><a class="block body-normal whitespace-nowrap py-1.5" style="opacity:.65" href="<?php echo esc_url( home_url( '/' ) ); ?>">‹ Alla enheter</a></li>
 					<?php endif; ?>
 					<?php foreach ( $noav_landing ? noav_global_sections() : noav_sections() as $slug => $label ) : ?>
-					<li class="border-b-2" style="border-color:transparent"><a class="block body-normal whitespace-nowrap py-1.5" href="<?php echo esc_url( home_url( $noav_landing ? "/$slug/" : "/$noav_unit/$slug/" ) ); ?>"><?php echo esc_html( $label ); ?></a></li>
+					<?php $is_current = $slug === $noav_section; ?>
+					<li class="border-b-2" style="border-color:<?php echo $is_current ? '#000000' : 'transparent'; ?>"><a class="block body-normal whitespace-nowrap py-1.5" href="<?php echo esc_url( home_url( $noav_landing ? "/$slug/" : "/$noav_unit/$slug/" ) ); ?>"<?php echo $is_current ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $label ); ?></a></li>
 					<?php endforeach; ?>
 				</ul>
 				<?php if ( $noav_landing ) { include get_template_directory() . '/parts/_social.html'; } ?>

@@ -41,3 +41,33 @@ body {
 
 
 body.home { background-color: rgb(250, 247, 240); }
+
+/* Contact details use the front page's existing spacing and two-column grid. */
+.noav-contact {
+	padding-top: clamp(3.5rem, 6vw, 7rem);
+	padding-bottom: clamp(4.5rem, 8vw, 8.5rem);
+}
+
+.noav-contact-grid {
+	max-width: 68rem;
+	margin: 0 auto;
+	gap: clamp(3rem, 6vw, 5.5rem);
+}
+
+.noav-contact-details {
+	margin-top: 1.5rem;
+	line-height: 1.5;
+}
+
+.noav-contact-details p {
+	margin: 0;
+}
+
+.noav-contact-details strong {
+	font-weight: 600;
+}
+
+.noav-contact-group + .noav-contact-group,
+.noav-contact-map-link {
+	margin-top: 1.25rem;
+}

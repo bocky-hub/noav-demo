@@ -126,11 +126,6 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'noav-durable-page', $uri . '/assets/css/6ad5f70cb56137d7.css', array( 'noav-durable-base' ), file_exists( "$dir/assets/css/6ad5f70cb56137d7.css" ) ? filemtime( "$dir/assets/css/6ad5f70cb56137d7.css" ) : '1.0.0' );
 	wp_enqueue_style( 'noav-copy', $uri . '/assets/css/noav-copy.css', array( 'noav-durable-page' ), file_exists( "$dir/assets/css/noav-copy.css" ) ? filemtime( "$dir/assets/css/noav-copy.css" ) : '1.0.0' );
 
-	if ( is_page() && 'kontakt' === noav_current_section() ) {
-		wp_enqueue_style( 'leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', array(), '1.9.4' );
-		wp_enqueue_script( 'leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', array(), '1.9.4', true );
-	}
-
 	wp_enqueue_script( 'noav-main', $uri . '/assets/js/main.js', array(), file_exists( "$dir/assets/js/main.js" ) ? filemtime( "$dir/assets/js/main.js" ) : '1.0.0', true );
 } );
 
