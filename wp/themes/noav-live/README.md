@@ -8,39 +8,47 @@ renderas likadant — men serveras nu av WordPress.
 
 ## Så fungerar sajten
 
-- **Landning (`/`)** — ingen toppmeny, bara Noavs logga + två enhetskort
-  (Vinkelviken och Kyrkhult) i Noavs egen design. `parts/landing.php`.
-- **Klick på ett kort → in i enheten.** Först då dyker menyn upp, scopad till just
-  den enheten. En diskret "‹ Alla enheter"-länk tar tillbaka till landningen.
-- **`/vinkelviken/…`** — hela den trogna kopian av noav.se (riktigt innehåll).
-- **`/kyrkhult/…`** — samma struktur och meny, men **platshållarinnehåll** (framtida
-  enhet). Känt faktum: adress **Vilshultsvägen 15** (Vilshult, Olofström). Allt annat
-  (föreståndare, personal, telefon, e-post, foton) är tydligt märkt "[Kompletteras]" —
-  inget är påhittat.
+- **Startsida (`/`)** — Noavs logga, den gemensamma menyn och två enhetskort.
+  Enheternas rubriker, texter och platsantal visas ovanför bilderna.
+- **Gemensam meny:** Om oss (`/oss/`), Platsförfrågan (`/platsforfrogan/`)
+  och Kontakt (`/kontakt/`). Kontaktuppgifter och platsförfrågan visar båda enheterna.
+- **Enhetsmeny:** Målgrupp, Behandling, Aktuellt och Galleri, samt ”‹ Alla enheter”.
+  Alla fyra länkar pekar på den aktuella enhetens sidor.
+- Färger, typsnitt, bilder, rundningar och befintlig innehållsstil är bevarade.
 
 ### Sidträd
 
 ```
-/                         landning (enhetsväljare)        front-page.php → parts/landing.php
-/vinkelviken/             hero                            page.php → parts/vinkelviken/home.php
-/vinkelviken/oss/         Om oss                          parts/vinkelviken/oss.php
-/vinkelviken/malgrupp/    Målgrupp                        …
-/vinkelviken/behandling/  Behandling
-/vinkelviken/platsforfrogan/  Platsförfrågan
-/vinkelviken/kontakt/     Kontakt (+ karta)
-/vinkelviken/aktuellt/    Aktuellt
-/vinkelviken/galleri/     Galleri (24 bilder)
-/kyrkhult/ … /kyrkhult/galleri/   samma sju sektioner, platshållarinnehåll
+/                          enhetsväljare
+/oss/                      gemensam organisationsinformation
+/platsforfrogan/           båda enheternas platsförfrågan
+/kontakt/                  båda enheternas kontaktuppgifter och kartor
+/vinkelviken/              enhetens startsida
+/vinkelviken/malgrupp/     Målgrupp
+/vinkelviken/behandling/   Behandling
+/vinkelviken/aktuellt/     Aktuellt
+/vinkelviken/galleri/      Galleri
+/kyrkhult/…                samma fyra sektioner
 ```
 
-Alla sidor, enheterna och startsidan skapas **automatiskt när temat aktiveras**
-(`after_switch_theme` i `functions.php`), hierarkiskt.
+Sidträdet skapas vid aktivering. Vid uppdatering av ett redan aktivt tema skapas
+saknade gemensamma sidor automatiskt, utan att befintligt sidinnehåll skrivs över.
+De äldre länkarna `/vinkelviken/oss/`, `/kyrkhult/kontakt/` osv. omdirigeras till
+den motsvarande gemensamma sidan.
+
+### Lediga platser
+
+Varje enhetskort på landningssidan visar antalet lediga platser (6 platser
+totalt per enhet). Antalet redigeras av personalen i **wp-admin → Lediga
+platser** — ett sifferfält per enhet, `0` visar "Fullbelagt just nu". Sparas som
+alternativen `noav_lediga_vinkelviken` / `noav_lediga_kyrkhult`; totalsiffrorna
+ändras i `noav_platser_totalt()` i `functions.php`.
 
 ## Uppbyggnad
 
-- `header.php` — enhets-medveten: på landningen visas bara loggan; inne i en enhet
+- `header.php` — enhets-medveten: på landningen visas loggan och den gemensamma menyn; inne i en enhet
   byggs menyn dynamiskt och länkas till den enhetens sidor.
-- `page.php` — väljer `parts/<enhet>/<sektion>.php` utifrån aktuell sida.
+- `page.php` — väljer `parts/<enhet>/<sektion>.php` eller `parts/global/<sektion>.php` utifrån aktuell sida.
 - `functions.php` — enhets-/sektionshjälpare + hierarkisk sidskapning.
 - `parts/vinkelviken/*` — riktigt innehåll (från originalets renderade DOM).
 - `parts/kyrkhult/*` — platshållarsidor som speglar Vinkelvikens layout.
@@ -57,8 +65,9 @@ docker compose -f docker-compose.copy.yml up -d
 ./bin/setup-live.sh
 ```
 
-Sajten: <http://localhost:8081> · wp-admin: <http://localhost:8081/wp-admin>
-(`noav` / `noav`). Körs separat från demo-miljön på port 8080.
+Sajten: <http://localhost:8082> · wp-admin: <http://localhost:8082/wp-admin>
+(`noav` / `noav`). Port 8082 — 8081 är Metros standardport och krockar med
+React Native-utveckling.
 
 ## Kör i webbläsaren (WordPress Playground)
 

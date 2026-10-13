@@ -27,14 +27,18 @@ body {
 }
 
 /* Kontakt map container height (the original sizes it via the map script). */
-#noav-leaflet {
+[data-noav-map] {
 	min-height: 20rem;
 }
 
 @media (min-width: 768px) {
-	#noav-leaflet { min-height: 24rem; }
+	[data-noav-map] { min-height: 24rem; }
 }
 
 @media (min-width: 1024px) {
-	#noav-leaflet { min-height: 28rem; }
+	[data-noav-map] { min-height: 28rem; }
 }
+
+/* Shared navigation uses the existing fonts, spacing and link treatment. */
+.noav-global-nav { padding-bottom: 1.5rem; }
+.noav-global-toggle { position: absolute; right: 1.5rem; }

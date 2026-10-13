@@ -2,9 +2,8 @@
 /**
  * Header — reproduces the noav.se document shell, now unit-aware.
  *
- * On the landing page (front page) the top menu is hidden — only the logo
- * shows. Inside a unit (vinkelviken / kyrkhult) the full menu appears,
- * scoped to that unit, plus an "Alla enheter" link back to the landing.
+ * Shared pages appear beside the front-page navigation. Inside a unit,
+ * the menu shows only unit-specific sections and a link back to all units.
  *
  * @package Noav_Live
  */
@@ -31,12 +30,21 @@ $noav_landing = ( '' === $noav_unit );
 	<div id="main-body" class="flex flex-col h-full overflow-y-auto overflow-x-hidden smooth-scroll transition-all">
 <?php if ( $noav_landing ) : ?>
 	<header id="website-header" class="!z-[2000] transition-colors duration-300 sticky top-0" style="background-color: rgb(255, 255, 255); color: rgb(17, 24, 39);">
-		<div class="relative z-10 flex items-center justify-center mx-auto pt-8 pb-8 px-6 lg:px-12">
+		<div class="relative z-10 noav-global-header flex items-center justify-center mx-auto pt-8 pb-8 px-6 lg:px-12">
 			<a class="max-w-full overflow-hidden grid" target="_self" href="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<img class="hidden lg:block transition-all object-contain" src="<?php echo NOAV_URI; ?>/img/25ajhhe94M3miqtjN3O4vBkcRfQuAFCMFg8YG4Izo0ohYjDOSkmzxPJJMvp7n03p.png" alt="Noav" style="height:120px">
 				<img class="lg:hidden transition-all object-contain" src="<?php echo NOAV_URI; ?>/img/25ajhhe94M3miqtjN3O4vBkcRfQuAFCMFg8YG4Izo0ohYjDOSkmzxPJJMvp7n03p.png" alt="Noav" style="height:64px">
 			</a>
+			<div class="noav-global-toggle"><?php include get_template_directory() . '/parts/_hamburger.html'; ?></div>
 		</div>
+		<nav class="noav-global-nav hidden lg:flex items-center justify-center gap-10 px-6" aria-label="Huvudmeny">
+			<ul class="flex items-center flex-wrap justify-center gap-x-6" style="color:rgb(17,24,39);">
+				<?php foreach ( noav_global_sections() as $slug => $label ) : ?>
+					<li class="border-b-2" style="border-color:transparent"><a class="block body-normal whitespace-nowrap py-1.5" href="<?php echo esc_url( home_url( "/$slug/" ) ); ?>"<?php if ( noav_current_section() === $slug ) echo ' aria-current="page"'; ?>><?php echo esc_html( $label ); ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+			<?php include get_template_directory() . '/parts/_social.html'; ?>
+		</nav>
 	</header>
 <?php else : ?>
 	<header id="website-header" class="!z-[2000] transition-colors duration-300 sticky top-0" style="background-color: rgb(255, 255, 255); color: rgb(17, 24, 39);">
@@ -55,10 +63,9 @@ $noav_landing = ( '' === $noav_unit );
 				<ul class="hidden items-center flex-wrap lg:flex justify-end gap-x-6" style="color: rgb(17, 24, 39);">
 					<li class="border-b-2" style="border-color:transparent;background-color:transparent;color:currentColor"><a class="block body-normal whitespace-nowrap py-1.5" style="opacity:.65" target="_self" href="<?php echo esc_url( home_url( '/' ) ); ?>">‹ Alla enheter</a></li>
 					<?php foreach ( noav_sections() as $slug => $label ) : ?>
-						<li class="border-b-2" style="border-color:transparent;background-color:transparent;color:currentColor"><a class="block body-normal whitespace-nowrap py-1.5" target="_self" href="<?php echo esc_url( home_url( "/$noav_unit/$slug" ) ); ?>"><?php echo esc_html( $label ); ?></a></li>
+						<li class="border-b-2" style="border-color:transparent;background-color:transparent;color:currentColor"><a class="block body-normal whitespace-nowrap py-1.5" target="_self" href="<?php echo esc_url( home_url( "/$noav_unit/$slug/" ) ); ?>"><?php echo esc_html( $label ); ?></a></li>
 					<?php endforeach; ?>
 				</ul>
-				<?php include get_template_directory() . '/parts/_social.html'; ?>
 			</div>
 			<?php include get_template_directory() . '/parts/_hamburger.html'; ?>
 		</div>

@@ -10,9 +10,9 @@ get_header();
 
 $unit    = noav_current_unit();
 $section = noav_current_section();
-$part    = get_template_directory() . "/parts/$unit/$section.php";
+$part    = get_template_directory() . ( $unit ? "/parts/$unit/$section.php" : "/parts/global/$section.php" );
 
-if ( $unit && file_exists( $part ) ) {
+if ( file_exists( $part ) && ( $unit || isset( noav_global_sections()[ $section ] ) ) ) {
 	include $part;
 } else {
 	?>

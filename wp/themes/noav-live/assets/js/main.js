@@ -34,19 +34,23 @@
 			panel.appendChild(list);
 			header.appendChild(panel);
 
+			panel.id = 'noav-mobile-menu';
+			btn.setAttribute('aria-controls', panel.id);
+			btn.setAttribute('aria-label', 'Öppna meny');
 			btn.setAttribute('aria-expanded', 'false');
 			btn.addEventListener('click', function (e) {
 				e.preventDefault();
 				var open = panel.style.display === 'block';
 				panel.style.display = open ? 'none' : 'block';
 				btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+				btn.setAttribute('aria-label', open ? 'Öppna meny' : 'Stäng meny');
 			});
 		}
 	}
 
 	/* ---- Kontakt map (Leaflet + OpenStreetMap) ------------------------ */
-	var mapEl = document.getElementById('noav-leaflet');
-	if (mapEl && window.L) {
+	if (window.L) {
+	Array.prototype.forEach.call(document.querySelectorAll('[data-noav-map]'), function (mapEl) {
 		var lat = parseFloat(mapEl.getAttribute('data-lat')) || 55.8575946;
 		var lng = parseFloat(mapEl.getAttribute('data-lng')) || 13.6611013;
 		var zoom = parseInt(mapEl.getAttribute('data-zoom'), 10) || 16;
@@ -56,7 +60,8 @@
 			maxZoom: 19,
 			attribution: '&copy; OpenStreetMap-bidragsgivare'
 		}).addTo(map);
-		L.marker([lat, lng]).addTo(map).bindPopup('Vinkelvikens HVB<br>Vinkelgatan 11, Hörby');
+		L.marker([lat, lng]).addTo(map).bindPopup(mapEl.getAttribute('data-label') || 'Noav');
 		setTimeout(function () { map.invalidateSize(); }, 200);
+	});
 	}
 })();
