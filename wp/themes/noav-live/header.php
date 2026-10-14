@@ -11,7 +11,7 @@ $noav_unit    = function_exists( 'noav_current_unit' ) ? noav_current_unit() : '
 $noav_landing = ( '' === $noav_unit );
 $noav_section = noav_current_section();
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?> style="scroll-padding-top: 128px; --head-fontFamily: 'Merriweather', serif; --head-fontWeight: 400; --head-fontStyle: normal; --body-fontFamily: 'Nunito', sans-serif; --body-fontWeight: 400; --body-fontStyle: normal; --body-fontHeight: 1.25; --header-logo-fontFamily: 'Bree Serif', serif; --footer-logo-fontFamily: 'Bree Serif', serif; --header-logo-fontWeight: 400; --footer-logo-fontWeight: 400;">
+<html <?php language_attributes(); ?> style="scroll-padding-top: 128px; --head-fontFamily: 'Merriweather', serif; --head-fontWeight: 400; --head-fontStyle: normal; --body-fontFamily: 'Nunito', sans-serif; --body-fontWeight: 400; --body-fontStyle: normal; --body-fontHeight: 1; --header-logo-fontFamily: 'Bree Serif', serif; --footer-logo-fontFamily: 'Bree Serif', serif; --header-logo-fontWeight: 400; --footer-logo-fontWeight: 400;">
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width">
