@@ -25,7 +25,7 @@
 						<p>Vilshultsvägen 15<br>293 74 Kyrkhult</p>
 					</div>
 					<div class="noav-contact-group">
-						<p><strong>Föreståndare</strong><br>Mia Möller<br><a href="mailto:mia.moller@noav.se">mia.moller@noav.se</a><br>Telefonnummer: <a href="tel:+46765188400">0765-18 84 00</a></p>
+						<p><strong>Verksamhetschef/föreståndare</strong><br>Mia Möller<br><a href="mailto:mia.moller@noav.se">mia.moller@noav.se</a><br>Telefonnummer: <a href="tel:+46765188400">0765-18 84 00</a></p>
 					</div>
 					<div class="noav-contact-map-link">
 						<p><a class="underline" href="https://www.google.com/maps/search/?api=1&amp;query=Vilshultsv%C3%A4gen+15%2C+293+74+Kyrkhult" target="_blank" rel="noopener">Öppna i Google Maps</a></p>

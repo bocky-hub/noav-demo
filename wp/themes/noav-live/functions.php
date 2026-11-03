@@ -118,7 +118,7 @@ add_action( 'wp_enqueue_scripts', function () {
 
 	wp_enqueue_style(
 		'noav-fonts',
-		'https://fonts.googleapis.com/css2?family=Merriweather:wght@400&family=Nunito:wght@400;600;700;800&family=Bree+Serif:wght@400;500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Nunito:wght@400;600;700;800&family=Bree+Serif:wght@400;500;600;700;800&display=swap',
 		array(),
 		null
 	);
