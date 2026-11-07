@@ -1,30 +1,13 @@
 <?php
-/**
- * Page template — renders the matching section for the current unit + slug.
- * e.g. /vinkelviken/oss/  -> parts/vinkelviken/oss.php
- *      /kyrkhult/         -> parts/kyrkhult/home.php
- *
- * @package Noav_Live
- */
+/** Editable WordPress page content, styled by the Noav theme. */
 get_header();
-
-$unit    = noav_current_unit();
-$section = noav_current_section();
-$part    = get_template_directory() . ( $unit ? "/parts/$unit/$section.php" : "/parts/global/$section.php" );
-
-if ( file_exists( $part ) && ( $unit || isset( noav_global_sections()[ $section ] ) ) ) {
-	include $part;
-} else {
-	?>
-	<section class="relative"><div class="relative z-10 container mx-auto pt-8 lg:pt-12 pb-8 lg:pb-12"><div class="rich-text-block" style="color: rgb(17, 24, 39);">
-	<?php
-	while ( have_posts() ) {
-		the_post();
-		the_content();
-	}
-	?>
-	</div></div></section>
-	<?php
-}
-
-get_footer();
+?>
+<main id="noav-content" class="noav-content">
+<?php while ( have_posts() ) : the_post(); ?>
+<?php if ( ! is_front_page() && ! get_post_meta( get_the_ID(), '_noav_editable_migrated', true ) ) : ?>
+<h1 class="noav-custom-page-title"><?php the_title(); ?></h1>
+<?php endif; ?>
+<?php the_content(); ?>
+<?php endwhile; ?>
+</main>
+<?php get_footer(); ?>

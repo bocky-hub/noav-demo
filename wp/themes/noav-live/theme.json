@@ -1,0 +1,10 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": false,
+    "layout": {"contentSize":"1088px","wideSize":"1280px"},
+    "color": {"custom": false,"defaultPalette":false,"palette":[{"slug":"noav-ink","name":"Text","color":"#111827"},{"slug":"noav-brown","name":"Noav brun","color":"#523f29"},{"slug":"noav-cream","name":"Noav ljus","color":"#faf7f0"},{"slug":"white","name":"Vit","color":"#ffffff"}]},
+    "typography": {"customFontSize":false,"fontFamilies":[{"fontFamily":"'Nunito',sans-serif","slug":"nunito","name":"Nunito"},{"fontFamily":"'Merriweather',serif","slug":"merriweather","name":"Merriweather"}],"fontSizes":[{"slug":"small","name":"Liten","size":"14px"},{"slug":"medium","name":"Normal","size":"18px"},{"slug":"large","name":"Stor","size":"28px"}]}
+  }
+}

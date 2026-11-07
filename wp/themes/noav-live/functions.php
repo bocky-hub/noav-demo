@@ -47,7 +47,8 @@ function noav_platser_totalt( $unit ) {
 		'vinkelviken' => 6,
 		'kyrkhult'    => 6,
 	);
-	return isset( $totalt[ $unit ] ) ? $totalt[ $unit ] : 0;
+	$settings = get_option( 'noav_site_settings', array() );
+	return isset( $totalt[ $unit ] ) ? max( 1, min( 1000, (int) ( $settings[ 'total_' . $unit ] ?? $totalt[ $unit ] ) ) ) : 0;
 }
 
 /** Antal lediga platser för en enhet (0..totalt). Redigeras i wp-admin → Lediga platser. */
@@ -109,6 +110,10 @@ function noav_current_section() {
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'editor-styles' );
+	add_theme_support( 'wp-block-styles' );
+	add_theme_support( 'responsive-embeds' );
+	add_editor_style( 'assets/css/editable-content.css' );
 	add_theme_support( 'html5', array( 'style', 'script' ) );
 } );
 
@@ -126,6 +131,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'noav-durable-page', $uri . '/assets/css/6ad5f70cb56137d7.css', array( 'noav-durable-base' ), file_exists( "$dir/assets/css/6ad5f70cb56137d7.css" ) ? filemtime( "$dir/assets/css/6ad5f70cb56137d7.css" ) : '1.0.0' );
 	wp_enqueue_style( 'noav-copy', $uri . '/assets/css/noav-copy.css', array( 'noav-durable-page' ), file_exists( "$dir/assets/css/noav-copy.css" ) ? filemtime( "$dir/assets/css/noav-copy.css" ) : '1.0.0' );
 
+	wp_enqueue_style( 'noav-editable', $uri . '/assets/css/editable-content.css', array( 'noav-copy' ), filemtime( $dir . '/assets/css/editable-content.css' ) );
 	wp_enqueue_script( 'noav-main', $uri . '/assets/js/main.js', array(), file_exists( "$dir/assets/js/main.js" ) ? filemtime( "$dir/assets/js/main.js" ) : '1.0.0', true );
 } );
 
@@ -138,8 +144,15 @@ function noav_setup_pages() {
 	if ( '' === get_option( 'permalink_structure' ) ) {
 		update_option( 'permalink_structure', '/%postname%/' );
 	}
-	update_option( 'blogname', 'Noav' );
-	update_option( 'blogdescription', 'HVB och skyddat boende' );
+	if ( ! get_option( 'noav_identity_initialized' ) ) {
+		if ( in_array( get_option( 'blogname' ), array( '', 'WordPress', 'My WordPress Website', 'Vinkelvikens HVB' ), true ) ) {
+			update_option( 'blogname', 'Noav' );
+		}
+		if ( in_array( get_option( 'blogdescription' ), array( '', 'Just another WordPress site' ), true ) ) {
+			update_option( 'blogdescription', 'HVB och skyddat boende' );
+		}
+		update_option( 'noav_identity_initialized', 1 );
+	}
 
 	$ensure = function ( $slug, $title, $parent = 0 ) {
 		$existing = get_page_by_path( $parent ? get_post_field( 'post_name', $parent ) . '/' . $slug : $slug );
@@ -289,3 +302,7 @@ function noav_platser_admin_page() {
 	</div>
 	<?php
 }
+
+// Editable content lives in WordPress, with an idempotent import of the existing site.
+require_once __DIR__ . '/inc/editor-tools.php';
+require_once __DIR__ . '/inc/content-migration.php';

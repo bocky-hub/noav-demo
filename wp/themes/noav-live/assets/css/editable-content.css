@@ -1,0 +1,58 @@
+/* Noav's content styles are shared by the website and WordPress editor. */
+.noav-content, .editor-styles-wrapper {
+ --noav-ink:#111827; --noav-accent:#523f29; --noav-cream:#faf7f0;
+ font-family:'Nunito',sans-serif; color:var(--noav-ink); font-size:18px; line-height:1.6;
+}
+.noav-content h1,.noav-content h2,.noav-content h3,.editor-styles-wrapper h1,.editor-styles-wrapper h2,.editor-styles-wrapper h3 {
+ font-family:'Merriweather',serif; font-weight:700; line-height:1.3; margin:0 0 1rem;
+}
+.noav-content h1,.editor-styles-wrapper h1 {font-size:clamp(2rem,4vw,3rem)}
+.noav-content h2,.editor-styles-wrapper h2 {font-size:clamp(1.7rem,3vw,2.5rem)}
+.noav-content h3,.editor-styles-wrapper h3 {font-size:clamp(1.25rem,2vw,1.6rem)}
+.noav-content p,.editor-styles-wrapper p {margin:0 0 1.25rem;line-height:1.6}
+.noav-content a {color:inherit;text-underline-offset:3px}
+.noav-content p a {text-decoration:underline}
+.noav-section {padding:clamp(3rem,6vw,5rem) 24px;background:#fff}
+.noav-section:nth-child(even) {background:#fffcf0}
+.noav-section.noav-landing,.noav-section.noav-contact {background:#faf7f0;padding-top:clamp(3.5rem,6vw,7rem);padding-bottom:clamp(4.5rem,8vw,8.5rem)}
+.noav-container {max-width:1088px!important;margin-left:auto!important;margin-right:auto!important}
+.noav-rich-content {max-width:1024px;margin:auto}
+.noav-columns.wp-block-columns {gap:clamp(2rem,5vw,5.5rem);margin:0;align-items:stretch}
+.noav-columns-reverse.wp-block-columns {flex-direction:row-reverse}
+.noav-unit-card {text-align:center}
+.noav-unit-card h2,.noav-contact h2 {color:#523f29}
+.noav-unit-card h2 a {text-decoration:none}
+.noav-unit-card .wp-block-image {margin:2rem 0 0}
+.noav-unit-card .wp-block-image img {width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 65%;border-radius:24px}
+.noav-unit-card .wp-block-image a {display:block}
+.noav-unit-card p {margin-bottom:.3rem}
+.noav-content .wp-block-image img {height:auto;max-width:100%;border-radius:16px}
+.noav-content .wp-block-image {margin:1.5rem 0}
+.noav-content .wp-block-image figcaption {font-size:.9rem;text-align:center;margin-top:.75rem}
+.noav-gallery.wp-block-gallery {gap:16px}
+.noav-gallery .wp-block-image img {border-radius:16px}
+.noav-contact .wp-block-column {text-align:center}
+.noav-contact p {margin:0 0 1.25rem}
+.noav-news-card {margin-top:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid #e9e2d8}
+.noav-news-card .wp-block-image {max-width:44rem;margin-left:auto;margin-right:auto}
+.noav-news-card .wp-block-image img {width:100%;max-height:32rem;object-fit:cover}
+.noav-hero {position:relative;isolation:isolate;overflow:hidden;min-height:calc(100vh - 238px);background:linear-gradient(#fff,#fffcf0)}
+.noav-hero .noav-hero-image {position:absolute;inset:0;z-index:-1;margin:0;opacity:.18}
+.noav-hero .noav-hero-image img {width:100%;height:100%;object-fit:cover;border-radius:0}
+.noav-hero-content {text-align:center;max-width:64rem;margin:auto}
+.noav-content .wp-block-buttons {margin-top:1.5rem;gap:1rem;justify-content:center}
+.noav-content .wp-block-button__link,.editor-styles-wrapper .wp-block-button__link {border-radius:40px;background:#523f29;color:white;padding:14px 28px;text-decoration:none;font-family:'Nunito',sans-serif}
+.noav-content strong {font-weight:700}
+.noav-content ul,.noav-content ol {padding-left:1.5rem;margin-bottom:1.25rem}
+.noav-content > :not(.noav-section) {max-width:1088px;margin:2rem auto;padding-left:24px;padding-right:24px}
+.noav-social a {display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#111827;color:white;text-decoration:none;font-size:12px;font-weight:700}
+.noav-content :where(a,button):focus-visible {outline:3px solid #845e38;outline-offset:4px}
+.noav-content .aligncenter {margin-left:auto;margin-right:auto;text-align:center}
+.noav-content .has-text-align-center {text-align:center}
+.noav-content .has-text-align-right {text-align:right}
+@media(max-width:781px){.noav-columns.wp-block-columns{flex-direction:column}.noav-columns>.wp-block-column{flex-basis:100%!important}.noav-hero{min-height:60vh}}
+@media(max-width:600px){.noav-gallery.wp-block-gallery.has-nested-images figure.wp-block-image:not(#individual-image){width:100%!important}}
+/* Keep the editor's hero image selectable and all content easy to reach. */
+.editor-styles-wrapper .noav-section {padding:2rem 20px}
+.editor-styles-wrapper .noav-hero .noav-hero-image {position:relative;inset:auto;z-index:auto;opacity:1;max-height:240px;overflow:hidden}
+.editor-styles-wrapper .noav-hero {min-height:0}
